@@ -5,12 +5,9 @@ from PyQt5.QtCore import QTimer, pyqtSignal, QObject, QSize, Qt, QThread, \
 from PyQt5.QtWidgets import QLabel, QWidget, QMainWindow, QApplication, \
     QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QProgressBar, QGroupBox
 from PyQt5.Qt import QTest, QTransform, QSound
-import wx, json
-
-app = wx.App(False)
-SCREEN_WIDTH, SCREEN_HEIGHT = wx.GetDisplaySize()
-SCREEN_WIDTH *= 1.25
-SCREEN_HEIGHT *= 1.25
+import json
+SCREEN_WIDTH = 768
+SCREEN_HEIGHT = 1366
 
 with open('db.json') as file:
     database = json.load(file)
@@ -22,27 +19,27 @@ class Window(QWidget):
         # self.ser = serial.Serial('COM3')
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
 
-        self.setGeometry(SCREEN_WIDTH/2 - 450, SCREEN_HEIGHT/2 - 450, 900, 700)
+        self.setGeometry(0,0, SCREEN_WIDTH, SCREEN_HEIGHT)
 
         self.label = QLabel("Escanea tu Producto",self)
-        self.label.setGeometry(140,100, 300, 50)
+        self.label.setGeometry(90,100, 300, 50)
         self.label.setFont(QFont("Times",15))
 
         self.cart_label = QLabel("Tu Carro", self)
-        self.cart_label.setGeometry(520, 15, 380, 30)
+        self.cart_label.setGeometry(420, 15, 280, 30)
         self.cart_label.setFont(QFont("Times",15))
 
         self.cart_background = QGroupBox(self)
-        self.cart_background.setGeometry(500, 0, 400, 700)
+        self.cart_background.setGeometry(400, 0, 368, 1366)
         self.cart_background.setStyleSheet('background-color: rgb(100, 200, 100)')
         self.cart_background.lower()
 
         self.cart_layout = QGroupBox(self)
-        self.cart_layout.setGeometry(520, 50, 360, 530)
+        self.cart_layout.setGeometry(420, 50, 328, 1096)
         self.cart_layout.setStyleSheet('background-color: rgb(255, 255, 255)')
 
         self.label_total = QLabel("   Total: $0", self)
-        self.label_total.setGeometry(520, 580, 360, 100)
+        self.label_total.setGeometry(420, 1146, 328, 100)
         self.label_total.setFont(QFont("Times", 18))
         self.label_total.setStyleSheet('background-color: rgb(255, 255, 255)')
 
@@ -54,20 +51,20 @@ class Window(QWidget):
         self.code.show()
 
         self.layout = QGroupBox(self)
-        self.layout.setGeometry(0,0, 500,700)
+        self.layout.setGeometry(0,0, 500,1366)
         self.layout.lower()
 
         self.cart = {}
         self.total = 0
 
         self.boton_cancelar = QPushButton("Cancelar", self)
-        self.boton_cancelar.setGeometry(80, 570, 150, 80)
+        self.boton_cancelar.setGeometry(80, 1146, 130, 80)
         self.boton_cancelar.setFont(QFont("Times", 18))
         self.boton_cancelar.clicked.connect(self.cancelar)
         self.boton_cancelar.show()
 
         self.boton_imprimir = QPushButton("Imprimir", self)
-        self.boton_imprimir.setGeometry(280, 570, 150, 80)
+        self.boton_imprimir.setGeometry(230, 1146, 130, 80)
         self.boton_imprimir.setFont(QFont("Times", 18))
         self.boton_imprimir.show()
 
@@ -80,7 +77,7 @@ class Window(QWidget):
         self.total = 0
 
         self.cart_layout = QGroupBox(self)
-        self.cart_layout.setGeometry(520, 50, 360, 530)
+        self.cart_layout.setGeometry(520, 50, 360, 1096)
         self.cart_layout.setStyleSheet('background-color: rgb(255, 255, 255)')
         self.cart_layout.show()
 
@@ -96,19 +93,19 @@ class Window(QWidget):
         self.layout.hide()
 
         self.layout = QGroupBox(self)
-        self.layout.setGeometry(0,0, 500,700)
+        self.layout.setGeometry(0,0, 500,1366)
         self.layout.lower()
         for i in database:
             if i['Codigo'] == self.code.text():
                 label = QLabel('Nombre: ' + i['Nombre'], self.layout)
-                label.setGeometry(50, 100, 450, 50)
-                label.setFont(QFont("Times", 12))
+                label.setGeometry(20, 120, 450, 50)
+                label.setFont(QFont("Times", 13))
                 label = QLabel('Marca: ' + i['Marca'], self.layout)
-                label.setGeometry(50, 200, 450, 50)
-                label.setFont(QFont("Times", 12))
+                label.setGeometry(20, 270, 450, 50)
+                label.setFont(QFont("Times", 13))
                 label = QLabel('Precio: $' + i['Precio'], self.layout)
-                label.setGeometry(50, 300, 450, 50)
-                label.setFont(QFont("Times", 12))
+                label.setGeometry(20, 420, 450, 50)
+                label.setFont(QFont("Times", 13))
                 self.layout.show()
                 self.total += int(i['Precio'])
                 self.label_total.setText("   Total: ${}".format(str(self.total)))
