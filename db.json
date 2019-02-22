@@ -1,12 +1,14 @@
 [
  {
-    "Nombre": "Bebida Light Sabor Cola Botella",
+    "Nombre": "Bebida Light Sabor Cola Botella 2L",
     "Marca": "Coca-Cola",
-    "Precio": 1.000
+    "Precio": "1000",
+    "Codigo": "1"
  },
  {
     "Nombre": "Galletas Morocha Bolsa",
    "Marca": "McKay",
-   "Precio": 270
+   "Precio": "270",
+   "Codigo": "2"
  }
 ]
