@@ -10,5 +10,47 @@
    "Marca": "McKay",
    "Precio": "270",
    "Codigo": "2"
+ },
+ {
+    "Nombre": "Papas Fritas 250g",
+   "Marca": "Lays",
+   "Precio": "1190",
+   "Codigo": "3"
+ },
+ {
+    "Nombre": "Chocolate Trencito 150g",
+   "Marca": "Nestle",
+   "Precio": "990",
+   "Codigo": "4"
+ },
+ {
+    "Nombre": "Cuaderno 100 hjs tapa dura",
+   "Marca": "Torre",
+   "Precio": "560",
+   "Codigo": "5"
+ },
+ {
+    "Nombre": "Set de vasos 6 unidades",
+   "Marca": "Glass",
+   "Precio": "1270",
+   "Codigo": "6"
+ },
+ {
+    "Nombre": "Queso laminado 25lmms",
+   "Marca": "Colun",
+   "Precio": "1890",
+   "Codigo": "7"
+ },
+ {
+    "Nombre": "Leche chocolate 1lt",
+   "Marca": "Surlat",
+   "Precio": "890",
+   "Codigo": "8"
+ },
+ {
+    "Nombre": "Chocolate mani M&M",
+   "Marca": "M&M",
+   "Precio": "780",
+   "Codigo": "9"
  }
 ]
