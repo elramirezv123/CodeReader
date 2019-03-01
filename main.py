@@ -6,7 +6,10 @@ from PyQt5.QtWidgets import QLabel, QWidget, QMainWindow, QApplication, \
     QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QProgressBar, QGroupBox
 from PyQt5.Qt import QTest, QTransform, QSound
 import json
+from selenium import webdriver
 from clases import Tab, Buylayout, AddLayout, CheckItem
+from driverOptions import options, chromedriver_path
+
 import subprocess
 SCREEN_WIDTH = 768
 SCREEN_HEIGHT = 1366
@@ -87,6 +90,8 @@ class FloatingWindow(QWidget):
 
 if __name__ == "__main__":
     subprocess.Popen('taskkill /f /im explorer.exe', stdout=subprocess.PIPE)
+    chrome_driver = webdriver.Chrome(options=options, executable_path=chromedriver_path)
+    chrome_driver.get("https://www.lider.cl")
     app = QApplication([])
     editor = FloatingWindow()
     app.exec_()
