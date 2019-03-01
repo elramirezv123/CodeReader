@@ -257,7 +257,7 @@ class CheckItem(QGroupBox):
         self.setGeometry(0,0, SCREEN_WIDTH, SCREEN_HEIGHT)
 
         self.label = QLabel('Escanée un producto',self)
-        self.label.setGeometry(col3, row, col3, row)
+        self.label.setGeometry(col3, row, col4, row)
         self.label.setFont(QFont("Times", 15))
         self.loaded = False
         self.index = -1
@@ -295,21 +295,21 @@ class CheckItem(QGroupBox):
                 self.takeButton.clicked.connect(self.takeItem)
                 self.takeButton.show()
                 self.imageshower = QLabel(self.itemShower)
-                self.imageshower.setGeometry(col2,row11 + row/2,col4,row3)
+                self.imageshower.setGeometry(col2,row11 ,col4,row3)
                 self.imageshower.show()
 
                 self.plus_button = QPushButton('+', self.itemShower)
-                self.plus_button.setGeometry(col5, row6 + 350, col, row)
+                self.plus_button.setGeometry(col5, row9, col, row)
                 self.plus_button.show()
                 self.plus_button.clicked.connect(self.add)
 
                 self.take_value = QLabel('0', self.itemShower)
-                self.take_value.setGeometry(col4 + 30, row6 + 350, col / 2 ,row)
+                self.take_value.setGeometry(col4 + 30, row9, col / 2 ,row)
                 self.take_value.show()
                 self.take_value.setFont(QFont("Times", 15))
 
                 self.less_button = QPushButton('-', self.itemShower)
-                self.less_button.setGeometry(col3, row6 + 350, col, row)
+                self.less_button.setGeometry(col3, row9, col, row)
                 self.less_button.show()
                 self.less_button.clicked.connect(self.less)
                 self.less_button.setEnabled(False)
@@ -329,12 +329,12 @@ class CheckItem(QGroupBox):
                 contador = 0
                 for i in self.fields:
                     label = QLabel(i + ': ', self.itemShower)
-                    label.setGeometry(col, (row + 70) * contador , col + 20, row)
+                    label.setGeometry(col, (row + 70) * contador , col + 40, row)
                     label.setFont(QFont("Times",15))
                     label.show()
 
                     edit = self.fields[i]
-                    edit.setGeometry(col2 + 20, (row +70) * contador , col3, row)
+                    edit.setGeometry(col2 + 50, (row +70) * contador , col6, row)
                     edit.setFont(QFont("Times",15))
                     edit.show()
 

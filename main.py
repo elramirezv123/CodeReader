@@ -60,8 +60,10 @@ class Window(QWidget):
 
     def show(self):
         super().show()
+        self.windows[0].show()
         self.windows[1].hide()
         self.windows[2].hide()
+        self.change_tab(self.tabs[0])
 
 class FloatingWindow(QWidget):
 
