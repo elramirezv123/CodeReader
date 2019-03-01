@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QLabel, QWidget, QMainWindow, QApplication, \
 from PyQt5.Qt import QTest, QTransform, QSound
 import json
 from clases import Tab, Buylayout, AddLayout, CheckItem
+import subprocess
 SCREEN_WIDTH = 768
 SCREEN_HEIGHT = 1366
 row, col = (SCREEN_HEIGHT*0.05, SCREEN_WIDTH*0.1)
@@ -18,7 +19,8 @@ TABS = ['Agregar Productos', 'Retirar/Consultar', 'Comprar']
 class Window(QWidget):
 
     def __init__(self, parent = None):
-        super().__init__(parent)
+        super().__init__(None)
+        self.parent = parent
 
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
 
@@ -26,7 +28,6 @@ class Window(QWidget):
         self.setFixedSize(SCREEN_WIDTH, SCREEN_HEIGHT)
 
         self.main_layout = AddLayout(self)
-        self.show()
         retirar = CheckItem(self)
         comprar = Buylayout(self)
         self.tabs = {}
@@ -37,7 +38,10 @@ class Window(QWidget):
             self.tabs[i] = tab
 
         self.windows = {0: self.main_layout, 1: retirar, 2: comprar}
-        self.show()
+
+        self.closebutton = QPushButton('X', self)
+        self.closebutton.setGeometry(col9 + col *2 /3, 0, col/3, row/3)
+        self.closebutton.clicked.connect(self.close)
 
     def change_tab(self, tab):
         for t_values in self.tabs.values():
@@ -50,10 +54,37 @@ class Window(QWidget):
         elif isinstance(self.main_layout, CheckItem):
             self.main_layout.loadQty(self.main_layout.index)
 
+    def close(self):
+        self.parent.show()
+        self.hide()
+
+    def show(self):
+        super().show()
+        self.windows[1].hide()
+        self.windows[2].hide()
+
+class FloatingWindow(QWidget):
+
+    def __init__(self, parent = None):
+        super().__init__(parent)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+        self.setGeometry(col8, row18, 160, 140)
+        self.label = QLabel(self)
+        self.label.setGeometry(0,0,160,140)
+        self.label.setPixmap(QPixmap('logo.ai').scaled(160, 140))
+        self.show()
+        self.bigWindow = Window(self)
+
+
+    def mousePressEvent(self, event):
+        self.hide()
+        self.bigWindow.show()
+
 
 
 
 if __name__ == "__main__":
+    subprocess.Popen('taskkill /f /im explorer.exe', stdout=subprocess.PIPE)
     app = QApplication([])
-    editor = Window()
+    editor = FloatingWindow()
     app.exec_()
